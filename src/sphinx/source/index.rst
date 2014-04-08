@@ -3,9 +3,9 @@ PyTek Documentation
 =================================
 
 **PyTek** provides a python API for interacting with |tek| |oscopes| over a serial
-interface. It currently supports some basic commands for the `~pytek.TDS3xxx` series of
-|DPOs|, especially `capturing waveforms <pytek.TDS3xxx.get_waveform>`
-and `screen shots <pytek.TDS3xxx.screenshot>` from the device.
+interface. It currently supports some basic commands for the `~pytek.TDS3k` series of
+|DPOs|, especially `capturing waveforms <pytek.TDS3k.get_waveform>`
+and `screen shots <pytek.TDS3k.screenshot>` from the device.
 
 
 To get started, check out the documentation for the :doc:`pytek`.

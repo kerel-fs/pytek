@@ -6,7 +6,7 @@ for interfacing with various |tek| |oscopes| over a serial interface.
 
 Most classes in this module are based on a specific series of devices, based on the
 serial interface supported by the devices. There is currently only one class provided,
-`TDS3xxx` which supports the TDS 3000 series of devices.
+`TDS3k` which supports the TDS 3000 series of devices.
 
 
 .. note:: Serial Port Communications
@@ -22,9 +22,9 @@ import time
 import re
 
 
-class TDS3xxx(object):
+class TDS3k(object):
     """
-    The `TDS3xxx` class provides functions for interacting with the TDS 3000 series
+    The `TDS3k` class provides functions for interacting with the TDS 3000 series
     of |DPOs| from |tek|. Documentation on this interface is available from |tek|
     at `this link <tds3k_prog_man_>`_.
     """
@@ -51,13 +51,13 @@ class TDS3xxx(object):
         Example::
 
             #Import class
-            from pytek import TDS3xxx
+            from pytek import TDS3k
 
             #Import pyserial
             import serial
 
             port = serial.Serial("COM1", 9600)
-            tds = TDS3xxx(port)
+            tds = TDS3k(port)
             
             # ... do stuff with the tds object.
 
@@ -190,7 +190,7 @@ class TDS3xxx(object):
 
         """
         id = self.identify()
-        return TDS3xxx.ID_REGEX.match(id)
+        return TDS3k.ID_REGEX.match(id)
 
     def force_sanity(self):
         """
@@ -548,7 +548,7 @@ if __name__ == '__main__':
     start = time.time()
 
     port = serial.Serial("COM1", 9600, timeout=2)
-    tek = TDS3xxx(port)
+    tek = TDS3k(port)
 
     print tek.identify()
     tek.force_sanity()
