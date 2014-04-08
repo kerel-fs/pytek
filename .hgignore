@@ -23,4 +23,6 @@ sphinx/_build
 #setup.py stuff
 build
 dist
+distribute-0.6.14*
+**/pytek.egg-info
 
