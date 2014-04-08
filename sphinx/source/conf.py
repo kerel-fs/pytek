@@ -26,6 +26,16 @@ sys.path.insert(0, os.path.abspath('../..'))
 rst_prolog = """
 
 .. _pyserial: http://pyserial.sourceforge.net/
+.. _tds3k_prog_man: http://www.tek.com/oscilloscope/tds3014b-manual/tds3000-tds3000b-tds3000c-series
+
+.. |DPO|    replace:: :abbr:`DPO (Digital Phosphor Oscilloscope)`
+.. |DPOs|   replace:: :abbr:`DPO's (Digital Phosphor Oscilloscopes)`
+.. |DSO|    replace:: :abbr:`DSO (Digital Storage Oscilloscope)`
+.. |DSOs|   replace:: :abbr:`DSO's (Digital Storage Oscilloscopes)`
+.. |tek|    replace:: Tektronix
+.. |oscope|     replace:: oscilloscope
+.. |oscopes|    replace:: oscilloscopes
+.. |PYTEK|      replace:: :doc:`PyTek <index>`
 
 """
 
@@ -43,7 +53,13 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx',
 ]
+
+intersphinx_mapping = {
+    'serial': ('http://pyserial.sourceforge.net/', None),
+
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -97,7 +113,7 @@ default_role = 'py:obj'
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
-#show_authors = False
+show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
 #pygments_style = 'sphinx'
@@ -109,6 +125,10 @@ pygments_style = 'monokai'
 # If true, keep warnings as "system message" paragraphs in the built documents.
 #keep_warnings = False
 
+# Autodoc for class will combine the classe's docstr and the __init__ function's.
+autoclass_content = "both"
+#autodoc_member_order = "groupwise"
+autodoc_member_order = "bysource"
 
 # -- Options for HTML output ----------------------------------------------
 
