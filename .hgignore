@@ -1,0 +1,23 @@
+syntax: glob
+
+#Vim Swap files
+.*.swp
+.*.swo
+.*.swn
+.*.swm
+
+#Backup files
+*.orig
+*.original
+*.backup
+*.bup
+*~
+
+#Python files
+*.pyc
+*.pyo
+
+#Sphinx output
+sphinx/_build
+
+
