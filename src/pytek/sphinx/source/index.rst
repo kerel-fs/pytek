@@ -16,6 +16,9 @@ and `screen shots <pytek.TDS3k.screenshot>` from the device.
     one that matches the `pyserial`_ API. It is recommended that you simply use
     `pyserial` itself.
 
+Version
+----------
+PyTek |release|
 
 Project Resources
 ------------------

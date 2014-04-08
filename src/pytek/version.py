@@ -34,6 +34,9 @@ def setuptools_string():
         vstr += "-r%d" % RELEASE
     return vstr
 
+def short_string():
+    return "%d.%d" % (MAJOR, MINOR)
+
 def string():
     vstr = "%d.%d.%d.%d" % (MAJOR, MINOR, PATCH, SEMANTIC)
     if TAG is not None:
