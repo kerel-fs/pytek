@@ -20,7 +20,7 @@ DAY = 7
 # Dev and blood versions are still numbered for the *previous* version,
 # because we may not know what the next version will be until we're finished.
 TAG = "dev"
-TAG = None
+#TAG = None
 
 
 __months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]

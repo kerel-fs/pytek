@@ -37,6 +37,7 @@ Contents:
    :maxdepth: 4
 
    pytek
+   README
 
 
 Indices and tables

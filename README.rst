@@ -6,8 +6,28 @@ PyTek - Python API for Tektronix oscilloscopes' serial interface
 .. contents:: Contents
     :depth: 2
 
+TL;DR
+---------------
 
-Introduction
+What?
+~~~~~~~~~~~~~~
+A python package that gives you an API for interacting with supported Tektronix
+oscilloscopes over a serial interace.
+
+Install?
+~~~~~~~~~~~~~
+
+    pip install pytek
+
+Serial?
+~~~~~~~~~~~~~
+
+We don't provide a serial port implementation. We suggest, pyserial:
+
+    pip install pyserial
+
+
+Misc.
 ---------------
 
 
