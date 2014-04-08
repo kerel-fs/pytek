@@ -56,13 +56,20 @@ class TDS3k(object):
             #Import pyserial
             import serial
 
-            port = serial.Serial("COM1", 9600)
+            port = serial.Serial("COM1", 9600, timeout=1)
             tds = TDS3k(port)
             
             # ... do stuff with the tds object.
 
             #Closes the object's port.
             tds.close()
+
+        .. warning:: Serial Port Timeout
+
+            It is **very important** that you specify a timeout on your serial port.
+            The `get_response` method (used by things like `screenshot` and `get_curve`)
+            continue to read data until a read timesout, so if there is no timeout, it
+            will never return.
 
         """
         self.port = port
@@ -540,6 +547,15 @@ class TDS3k(object):
         return supported
 
 
+
+
+TDS3xxx = TDS3k
+"""
+ .. class: TDS3xxx(port)
+
+    An alias for `TDS3k`.
+
+"""
 
 
 if __name__ == '__main__':

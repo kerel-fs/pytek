@@ -4,7 +4,7 @@ PyTek - Python API for Tektronix oscilloscopes' serial interface
 
 
 .. contents:: Contents
-    :depth: 2
+    :depth: 3
 
 TL;DR
 ---------------
@@ -17,14 +17,74 @@ oscilloscopes over a serial interace.
 Install?
 ~~~~~~~~~~~~~
 
+::
+
     pip install pytek
 
 Serial?
 ~~~~~~~~~~~~~
 
-We don't provide a serial port implementation. We suggest, pyserial:
+We don't provide a serial port implementation. We suggest, `pyserial`_::
 
     pip install pyserial
+
+Getting Started?
+~~~~~~~~~~~~~~~~~~
+
+::
+
+    >>> from serial import Serial
+    >>> from pytek.pytek import TDS3k
+    >>>
+    >>> port = Serial("COM1", 9600, timeout=1)
+    >>> tds = TDS3k(port)
+    >>>
+    >>>
+    >>> # Make the scope identify itself.
+    ...
+    >>> tds.identify()
+    'TEKTRONIX,TDS 3034,0,CF:91.1CT FV:v2.11 TDS3GM:v1.00 TDS3FFT:v1.00 TDS3TRG:v1.00'
+    >>>
+    >>>
+    >>>
+    >>> # Capture waveform data
+    ...
+    >>> waveform = tds.get_waveform(start=100, stop=500)
+    >>> for x,y in tuple(waveform)[:10]:
+    ...     print x, y
+    ...
+    -0.0045 -0.16
+    -0.004499 -0.04
+    -0.004498 -0.04
+    -0.004497 -0.12
+    -0.004496 -0.12
+    -0.004495 -0.08
+    -0.004494 -0.12
+    -0.004493 -0.16
+    -0.004492 -0.2
+    -0.004491 -0.08
+    >>>
+    >>>
+    >>>
+    >>> # Grab a screen shot (this will take a few minutes).
+    ...
+    >>> ofile = open("screenshot.tiff", "wb")
+    >>> tds.screenshot(ofile, "tiff")
+    >>>
+    >>>
+    >>>
+    >>>
+    >>> #Fin.
+    ...
+    >>> tds.close()
+    >>>
+
+
+Docs?
+~~~~~~~~
+
+* `Read The Docs (.org) <http://pytek.readthedocs.org/>`_
+* `Python Hosted (.org) <http://pythonhosted.org/pytek/>`_
 
 
 Misc.
