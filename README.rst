@@ -7,10 +7,9 @@ PyTek - Python API for Tektronix oscilloscopes' serial interface
 .. _pyserial: http://pyserial.sourceforge.net/
 
 **PyTek** provides a python API for interacting with Tektronix oscilloscopes over a serial
-interface. It currently supports some basic commands for the `~pytek.TDS3k`
-series of :abbr:`DPOs (Digital Phosphor Oscilloscopes)`, especially
-`capturing waveforms <pytek.TDS3k.get_waveform>`
-and `screen shots <pytek.TDS3k.screenshot>` from the device.
+interface. It currently supports some basic commands for the TDS3000
+series of Digital Phosphor Oscilloscopes, especially *capturing waveforms*
+and *screen shots* from the device.
 
 .. note:: **Serial Port not Included**
 
@@ -19,7 +18,7 @@ and `screen shots <pytek.TDS3k.screenshot>` from the device.
     `pyserial`_ itself.
 
 
-.. contents:: Contents
+.. contents:: **Page Contents**
     :local:
     :depth: 2
     :backlinks: top
