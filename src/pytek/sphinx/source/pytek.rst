@@ -1,5 +1,5 @@
 
-pytek module
+API Documentation
 ============================
 
 .. automodule:: pytek

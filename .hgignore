@@ -7,6 +7,7 @@ syntax: glob
 .*.swm
 
 #Backup files
+*.bak
 *.orig
 *.original
 *.backup
