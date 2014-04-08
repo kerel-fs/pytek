@@ -8,7 +8,7 @@ interface. It currently supports some basic commands for the `~pytek.TDS3k` seri
 and `screen shots <pytek.TDS3k.screenshot>` from the device.
 
 
-To get started, check out the documentation for the :doc:`pytek`.
+**To get started**, check out the documentation for the :doc:`pytek`.
 
 .. note:: Serial Port Communications
 
@@ -16,6 +16,12 @@ To get started, check out the documentation for the :doc:`pytek`.
     one that matches the `pyserial`_ API. It is recommended that you simply use
     `pyserial` itself.
 
+
+Project Resources
+------------------
+
+* `Project Homepage (bitbucket) <https://bitbucket.org/bmearns/pytek>`_
+* `On pypi <https://pypi.python.org/pypi/pytek>`_
 
 
 External References

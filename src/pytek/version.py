@@ -1,4 +1,6 @@
 
+RELEASE = 1
+
 MAJOR = 1
 MINOR = 0
 PATCH = 0
@@ -18,6 +20,7 @@ DAY = 7
 # Dev and blood versions are still numbered for the *previous* version,
 # because we may not know what the next version will be until we're finished.
 TAG = "dev"
+TAG = None
 
 
 __months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -26,16 +29,19 @@ assert((MONTH > 0) and (MONTH <= len(__months)))
 def setuptools_string():
     vstr = "%d.%d.%d.%d" % (MAJOR, MINOR, PATCH, SEMANTIC)
     if TAG is not None:
-        vstr += "-p-%s" % TAG
+        vstr += "-x-%s" % TAG
+    else:
+        vstr += "-r%d" % RELEASE
     return vstr
 
 def string():
     vstr = "%d.%d.%d.%d" % (MAJOR, MINOR, PATCH, SEMANTIC)
     if TAG is not None:
         vstr += "-%s" % TAG
+    else:
+        vstr += "-r%d" % RELEASE
     return vstr
 
 def datestr():
     return "%d %s %02d" % (YEAR, __months[MONTH-1], DAY)
-
 
