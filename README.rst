@@ -58,7 +58,7 @@ We don't provide a serial port implementation. We suggest, `pyserial`_:
 Examples?
 ~~~~~~~~~~~~~~~~~~
 
-.. code:: pycon
+.. code:: python
 
     >>> from serial import Serial
     >>> from pytek import TDS3k
