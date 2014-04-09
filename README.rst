@@ -5,6 +5,7 @@ PyTek - Python API for Tektronix oscilloscopes' serial interface
 .. # POST TITLE
 
 .. _pyserial: http://pyserial.sourceforge.net/
+.. _sphinx_rtd_theme: https://github.com/snide/sphinx_rtd_theme
 
 **PyTek** provides a python API for interacting with Tektronix oscilloscopes over a serial
 interface. It currently supports some basic commands for the TDS3000
@@ -34,26 +35,30 @@ oscilloscopes over a serial interace.
 Install?
 ~~~~~~~~~~~~~
 
-::
+.. code:: bash
 
-    pip install pytek
+    $ pip install pytek
 
-Or, from source::
+Or, from source:
 
-    python setup.py install
+.. code:: bash
+
+    $ python setup.py install
 
 
 Serial?
 ~~~~~~~~~~~~~
 
-We don't provide a serial port implementation. We suggest, `pyserial`_::
+We don't provide a serial port implementation. We suggest, `pyserial`_:
 
-    pip install pyserial
+.. code:: bash
+
+    $ pip install pyserial
 
 Examples?
 ~~~~~~~~~~~~~~~~~~
 
-::
+.. code:: pycon
 
     >>> from serial import Serial
     >>> from pytek import TDS3k
@@ -108,6 +113,29 @@ Examples?
     ...
     >>> tds.close()
     >>>
+
+Dependencies?
+~~~~~~~~~~~~~~~~
+
+You'll need a serial port interface. See the "`Serial?`_" section, above.
+
+To build the sphinx docs from source (as is), you'll need the `sphinx_rtd_theme`_:
+
+.. code:: bash
+
+    $ pip install sphinx_rtd_theme
+
+
+Extras?
+~~~~~~~~~~~~
+
+PyTek package includes the following extras (optional installs):
+
+serial
+    Adds `pyserial`_ package as a requirement, the recommended serial port interface.
+
+docs
+    Adds `sphinx_rtd_theme`_ package as a requirement, needed for building sphinx docs.
 
 
 Docs?
