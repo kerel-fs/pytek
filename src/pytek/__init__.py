@@ -36,7 +36,7 @@ class TDS3k(object):
     The regular expression used to match the start of the `identify` string, 
     for `sanity_check`.
 
-    ::
+    .. code:: python
 
         r'^TEKTRONIX,TDS 3\d{3},'
         
@@ -87,6 +87,8 @@ class TDS3k(object):
 
     def send_command(self, command, *args):
         """
+        send_command(command, [arg1, [arg2, [...]]])
+
         Sends a command and any number of arguments to the device. Does not wait for response.
         
         .. seealso::
