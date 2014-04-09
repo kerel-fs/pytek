@@ -6,16 +6,6 @@
 /** Customizations **/
 
 .deprecated {
-    /* Warning:
-     BG: FFEDCC
-     Title: F0B37E
-     * */
-
-    /* Error:
-    BG: #FDF3F2
-    Title: F29F97
-    */
-
     background: #FFEDCC;
     padding: 5px;
     margin-bottom: 24px;
