@@ -8,12 +8,16 @@ Rel 2   - ???
             include them in builds so distributions can be used to build
             sphinx doc.
     [n] -   Added extras to setup.py: serial and docs.
+
+    [p] -   Moved the TDS3k class (and TDS3xxx alias) into the top level pytek
+            module (__init__.py), and left aliases in the pytek.pytek module.
+
     [s] -   Added INSTALL.txt top level doc file.
     [s] -   Cleaned up README.rst, added some stuff.
     [s] -   Fixed doc string for TDS3k.__init__, to include serial port
             timeout.
     [s] -   Using version.py to populate sphinx variables in conf.py
-    [s] -   Doc changes.
+    [s] -   Significant doc clean up and reorganization.
 
     
 
