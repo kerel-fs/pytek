@@ -62,24 +62,24 @@ Examples?
 
     >>> from serial import Serial
     >>> from pytek import TDS3k
-    >>>
+    >>> 
     >>> port = Serial("COM1", 9600, timeout=1)
     >>> tds = TDS3k(port)
-    >>>
-    >>>
+    >>> 
+    >>> 
     >>> # Make the scope identify itself.
     ...
     >>> tds.identify()
     'TEKTRONIX,TDS 3034,0,CF:91.1CT FV:v2.11 TDS3GM:v1.00 TDS3FFT:v1.00 TDS3TRG:v1.00'
-    >>>
-    >>>
-    >>>
+    >>> 
+    >>> 
+    >>> 
     >>> # Capture waveform data
     ...
     >>> waveform = tds.get_waveform(start=100, stop=109)
     >>> waveform
     <generator object <genexpr> at 0x0238B8A0>
-    >>
+    >> 
     >>> for x,y in waveform:
     ...     print x, y
     ...
@@ -93,26 +93,26 @@ Examples?
     -0.004493 -0.16
     -0.004492 -0.2
     -0.004491 -0.08
-    >>>
+    >>> 
     >>> tds.x_units()
     's'
     >>> tds.y_units()
     'V'
-    >>>
-    >>>
-    >>>
+    >>> 
+    >>> 
+    >>> 
     >>> # Grab a screen shot (this will take a few minutes).
     ...
     >>> ofile = open("screenshot.tiff", "wb")
     >>> tds.screenshot(ofile, "tiff")
-    >>>
-    >>>
-    >>>
-    >>>
+    >>> 
+    >>> 
+    >>> 
+    >>> 
     >>> #Fin.
     ...
     >>> tds.close()
-    >>>
+    >>> 
 
 Dependencies?
 ~~~~~~~~~~~~~~~~
