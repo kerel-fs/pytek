@@ -85,6 +85,9 @@ class TDS3k(object):
         """
         self.port.close()
 
+
+    ### Basic Communications ###
+
     def send_command(self, command, *args):
         """
         send_command(command, [arg1, [arg2, [...]]])
@@ -134,7 +137,6 @@ class TDS3k(object):
         if resp[0] == '"' and resp[-1] == '"':
             return resp[1:-1]
         raise ValueError("Expected a quoted string, received: %r" % resp)
-        
 
     def get_response(self):
         """
@@ -154,6 +156,8 @@ class TDS3k(object):
             data += c
         return data
 
+
+    ### Common Utility Commands ###
 
     def headers_off(self):
         """
@@ -210,51 +214,8 @@ class TDS3k(object):
             raise Exception("Unexpected string returned by identify.")
 
 
-    def get_num_points(self):
-        """
-        Queries the number of points that will be sent in a waveform or curve query,
-        based on the current settings.
 
-        This is relevant to functions like `get_waveform` and `get_curve`, but note
-        that those functions set the `DATA:START` and `DATA:STOP` configuration options
-        on the device based on provided parameters, thereby effecting the number of
-        points.
-        """
-        return int(self.send_query("WFMPRE:NR_PT"))
-
-    def y_units(self):
-        """
-        Returns a string giving the units of the Y axis based on the current waveform settings.
-
-        Example:
-        
-        >>> tds.y_units()
-        'V'
-        >>>
-
-        """
-        return self.query_quoted_string("WFMPRE:YUNIT")
-
-    def x_units(self):
-        """
-        Returns a string giving the units of the X axis based on the current waveform settings.
-        Possible values include `'s'` for seconds and `'Hz'` for Hertz.
-
-        Example:
-
-        >>> tds.x_units()
-        's'
-        >>>
-
-        """
-        return self.query_quoted_string("WFMPRE:XUNIT")
-
-    def trigger(self):
-        """
-        Force the device to trigger, if in READY state.
-        """
-        self.send_command("TRIGGER", "FORCE");
-
+    ### ACQUISITION ###
 
     def acquire_state(self, state=None):
         """
@@ -278,6 +239,14 @@ class TDS3k(object):
             return (self.send_query(header) == "1")
         self.send_command(header, "ON" if (state is True) else "OFF" if (state is False) else str(state))
 
+
+    ### TRIGGER ###
+
+    def trigger(self):
+        """
+        Force the device to trigger, if in READY state.
+        """
+        self.send_command("TRIGGER", "FORCE");
 
     def trigger_auto(self, auto=True):
         """
@@ -306,6 +275,10 @@ class TDS3k(object):
         """
         return self.send_query("TRIGGER:STATE")
 
+
+
+
+    ### Waveform and Data ###
 
     __WFM_PREAMBLE_FIELDS = (
             ('bytes_per_sample', int,),
@@ -478,7 +451,6 @@ class TDS3k(object):
 
         return points
 
-
     def get_waveform(self, source="CH1", double=True, start=1, stop=10000, preamble=False, timing=False):
         """
         Similar to `get_curve`, but uses `waveform premable <get_waveform_preamble>` data to properly scale
@@ -517,6 +489,48 @@ class TDS3k(object):
             return ret
         return data
 
+    def get_num_points(self):
+        """
+        Queries the number of points that will be sent in a waveform or curve query,
+        based on the current settings.
+
+        This is relevant to functions like `get_waveform` and `get_curve`, but note
+        that those functions set the `DATA:START` and `DATA:STOP` configuration options
+        on the device based on provided parameters, thereby effecting the number of
+        points.
+        """
+        return int(self.send_query("WFMPRE:NR_PT"))
+
+    def y_units(self):
+        """
+        Returns a string giving the units of the Y axis based on the current waveform settings.
+
+        Example:
+        
+        >>> tds.y_units()
+        'V'
+        >>>
+
+        """
+        return self.query_quoted_string("WFMPRE:YUNIT")
+
+    def x_units(self):
+        """
+        Returns a string giving the units of the X axis based on the current waveform settings.
+        Possible values include `'s'` for seconds and `'Hz'` for Hertz.
+
+        Example:
+
+        >>> tds.x_units()
+        's'
+        >>>
+
+        """
+        return self.query_quoted_string("WFMPRE:XUNIT")
+
+
+
+    ### HARDCOPY ###
 
     def screenshot(self, ofile=None, fmt="RLE", inksaver=True, landscape=False):
         """
