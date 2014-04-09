@@ -30,6 +30,7 @@ Documentation Contents:
    README
 
    pytek
+   version
 
    LICENSE
 
