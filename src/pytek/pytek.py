@@ -7,7 +7,9 @@
 
 """
 from . import TDS3k as top_TDS3k
+from . import TDS3xxx as top_TDS3xxx
 
 TDS3k = top_TDS3k
+TDS3xxx = top_TDS3xxx
 
 
