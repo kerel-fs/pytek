@@ -30,7 +30,6 @@ Documentation Contents:
    README
 
    pytek
-   pytek.pytek
 
    LICENSE
 

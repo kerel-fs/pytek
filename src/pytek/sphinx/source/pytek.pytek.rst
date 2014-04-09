@@ -1,3 +1,4 @@
+:orphan:
 
 ``pytek.pytek`` module
 ============================

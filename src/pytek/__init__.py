@@ -10,7 +10,7 @@ serial interface supported by the devices. There is currently only one class pro
 `TDS3k` which supports the TDS 3000 series of devices.
 
 
-.. note:: Serial Port Communications
+.. note:: **Serial Port not Included**
 
     :mod:`pytek` relies on a thirdparty serial port for communications, specifically
     one that matches the `pyserial`_ API. It is recommended that you simply use
