@@ -18,7 +18,7 @@ Getting Started
 ----------------
 
 To get started, try the :doc:`README`, or for complete documentation, 
-check out the :doc:`pytek` documentation page.
+check out the :doc:`pytek` API documentation page.
 
 
 Documentation Contents:
@@ -30,6 +30,7 @@ Documentation Contents:
    README
 
    pytek
+   pytek.pytek
 
    LICENSE
 
