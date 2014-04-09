@@ -530,7 +530,7 @@ class TDS3k(object):
 
     def check_img_format(self, fmt):
         """
-        Tests if a hardcopy image format is supported by the device. This simply sets the `HARDCOPY:FORmAT`
+        Tests if a hardcopy image format is supported by the device. This simply sets the `HARDCOPY:FORMAT`
         configuration value to the given format, and checks to see if it comes back as the same format.
 
         Return `True` if the format is supported, `False` otherwise.
@@ -556,52 +556,4 @@ TDS3xxx = TDS3k
     An alias for `TDS3k`.
 
 """
-
-
-if __name__ == '__main__':
-    import serial
-    
-    start = time.time()
-
-    port = serial.Serial("COM1", 9600, timeout=2)
-    tek = TDS3k(port)
-
-    print tek.identify()
-    tek.force_sanity()
-
-    ### Capture waveform points
-    if 0:
-
-        points = tuple(tek.get_waveform(double=False))
-
-        with open("waveform2.dat", "w") as ofile:
-            ofile.write("\n".join("%f %f" % pt for pt in points))
-
-        stop = time.time()
-        print "Captured %d points in %.2f seconds." % (len(points), stop - start)
-
-    ### Capture screenshot
-    else:
-        formats = (
-            ("TIFF", "tiff"),
-            ("RLE", "rel.bmp"),
-            ("BMP", "bw.bmp"),
-            ("BMPColor", "color.bmp"),
-            ("EPSColor", "color.eps"),
-            ("EPSMono", "mono.eps"),
-        )
-
-
-        times = {}
-        for fmt, ext in formats:
-
-            ofile = open("screenshot." + ext, "wb")
-            start = time.time()
-            tek.screenshot(ofile, fmt=fmt)
-            ofile.close()
-            stop = time.time()
-            times[fmt] = stop - start
-            print "Captured %s screenshot in %.2f seconds." % (fmt, stop - start)
-            
-
 

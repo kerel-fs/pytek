@@ -2,7 +2,7 @@
 pytek module
 ============================
 
-.. automodule:: pytek.pytek
+.. automodule:: pytek
     :members:
     :undoc-members:
     :show-inheritance:
