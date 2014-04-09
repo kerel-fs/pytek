@@ -7,4 +7,5 @@
     :members:
     :undoc-members:
     :show-inheritance:
+    :synopsis: Deprecated submodule.
 
