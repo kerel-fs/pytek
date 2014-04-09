@@ -247,6 +247,63 @@ class TDS3k(object):
         """
         return self.query_quoted_string("WFMPRE:XUNIT")
 
+    def trigger(self):
+        """
+        Force the device to trigger, if in READY state.
+        """
+        self.send_command("TRIGGER", "FORCE");
+
+
+    def acquire_state(self, state=None):
+        """
+        Set or query the acquisition state. If the `state` parameter is `None`, then queries and
+        returns the acuire state as a bool: `True` means the device is acquiring data, `False`
+        means it is not.
+
+        If `state` is not `None`, then the acquire state is configured on the device. A value of
+        `True` for `state` turns acquisitions on, meaning the device will acquire data. A value of
+        `False` stops acquisitions.
+        
+        Any other value will be passed as a string to the device
+        as the argument to the ``ACQUIRE:STATE`` command. Commonly accepted values are
+        ``"ON"`` or ``"RUN"`` to turn acqusition on, and ``"OFF"`` or ``"STOP"`` to turn
+        acquisition off.
+
+        """
+        header = "ACQUIRE:STATE"
+
+        if state is None:
+            return (self.send_query(header) == "1")
+        self.send_command(header, "ON" if (state is True) else "OFF" if (state is False) else str(state))
+
+
+    def trigger_auto(self, auto=True):
+        """
+        Enables or disables the automatic trigger mode.
+
+        :param bool auto: If `True` (the default), the device is configured to trigger in auto mode,
+            meaning it generates a trigger automatically after a specific time period (if not trigger
+            is otherwise detected).
+            
+            If `False`, configures the device in NORMAL trigger mode, meaning it will wait to trigger
+            until it detects a valid trigger event.
+        """
+        self.send_command("TRIGGER:A:MODE", "AUTO" if auto else "NORM" )
+
+    def trigger_state(self):
+        """
+        Returns a string indicating the current trigger state of the device.
+
+        The following list gives the possible return values:
+
+        * **AUTO** - indicates that the oscilloscope is in auto mode and acquires data even in the absence of a trigger.
+        * **ARMED** - indicates that the oscilloscope is acquiring pretrigger information. All triggers are ignored in this state.
+        * **READY** - indicates that all pretrigger information has been acquired and the oscilloscope is ready to accept a trigger.
+        * **SAV** - indicates that acquisition is stopped or that all channels are off.
+        * **TRIG** - indicates that the oscilloscope has seen a trigger and is acquiring the posttrigger information.
+        """
+        return self.send_query("TRIGGER:STATE")
+
 
     __WFM_PREAMBLE_FIELDS = (
             ('bytes_per_sample', int,),
