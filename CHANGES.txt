@@ -1,3 +1,22 @@
+Rel 2   - ???
+    [n] -   Added TDS3xxx as an alias for TDS3k class.
+    [n] -   Copied pytek.pytek.TDS3k and TDS3xxx into top level pytek module,
+            for easier imports.
+    [n] -   Added short_string method to version.py, to get a Major.minor
+            version string.
+    [n] -   Added sphinx source, config, and script files to MANIFEST.in, to
+            include them in builds so distributions can be used to build
+            sphinx doc.
+    [n] -   Added extras to setup.py: serial and docs.
+    [s] -   Added INSTALL.txt top level doc file.
+    [s] -   Cleaned up README.rst, added some stuff.
+    [s] -   Fixed doc string for TDS3k.__init__, to include serial port
+            timeout.
+    [s] -   Using version.py to populate sphinx variables in conf.py
+    [s] -   Doc changes.
+
+    
+
 Rel 1   - v1.0.0.0 - 2014-04-08
     *Initial public release.
 
