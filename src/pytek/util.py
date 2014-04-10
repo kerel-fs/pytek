@@ -517,7 +517,10 @@ is returned.
 
             for attr, val in dct.items():
                 if isinstance(val, Configurator):
-                    dct[attr] = val.create_method(attr)
+                    method = val.create_method(attr)
+                    #Add nicer signature to doc string.
+                    method.__doc__ = ("%s([val])\n\n" % attr) + method.__doc__
+                    dct[attr] = method
 
             return super(Configurator.ConfigurableMeta, meta).__new__(meta, name, bases, dct)
 
