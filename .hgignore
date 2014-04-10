@@ -3,6 +3,7 @@ syntax: glob
 
 #temp files
 temp~*
+temp.py
 
 #Vim Swap files
 .*.swp
