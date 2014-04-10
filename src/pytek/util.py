@@ -318,19 +318,21 @@ is returned.
         """
         Creates a method with the given name which can be installed in a class to delegate
         to this object's `__call__` method. Sets the name of the method to `name`,
-        and sets the docstr (`__doc__`) to the value of this object's `doc` attribute.
+        and sets the docstr (``__doc__``) to the value of this object's `doc` attribute.
 
         This is used by `ConfigurableMeta` to replace Configurator instances in the classes
         dictionary with functions.
         """
-        def config(device, val=None):
-            return self(device, val)
-        config.__name__ = name
-        config.__doc__ = self.doc
-        return config
+        config = self
+        def c(self, val=None):
+            return config(self, val)
+        c.__name__ = name
+        c.__doc__ = self.doc
+        return c
 
 
     __DOC_APPEND = re.compile(r'^\s*\n(\s*)\+\+\+\s*\n', re.M)
+    __DOC_PREPEND = re.compile(r'^\s*\n(\s*)\-\-\-\s*\n', re.M)
 
     def update_doc(self, func):
         """
@@ -344,12 +346,23 @@ is returned.
         if func.__doc__ is not None:
             match = self.__DOC_APPEND.match(func.__doc__)
             if match:
+                #Append
                 indent = re.compile(r'^' + re.escape(match.group(1)))
                 doc = self.__DOC_APPEND.sub('', func.__doc__)
                 doc = os.linesep.join(indent.sub('', line) for line in doc.splitlines())
                 self.doc += '\n\n' + doc
             else:
-                self.doc = func.__doc__
+                match = self.__DOC_PREPEND.match(func.__doc__)
+                if match:
+                    #Prepend
+                    indent = re.compile(r'^' + re.escape(match.group(1)))
+                    doc = self.__DOC_PREPEND.sub('', func.__doc__)
+                    doc = os.linesep.join(indent.sub('', line) for line in doc.splitlines())
+                    self.doc = doc + '\n\n' + self.doc
+                    
+                else:
+                    #Replace
+                    self.doc = func.__doc__
 
     @classmethod
     def func_to_name(cls, func):
@@ -507,4 +520,13 @@ is returned.
                     dct[attr] = val.create_method(attr)
 
             return super(Configurator.ConfigurableMeta, meta).__new__(meta, name, bases, dct)
+
+
+class Configurable(object):
+    """
+    Just a simple base classes that uses `~Configurator.ConfigurableMeta`
+    as the metaclass.
+    """
+
+    __metaclass__ = Configurator.ConfigurableMeta
 
