@@ -19,7 +19,9 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #Add our own package to the path.
+sys.path.insert(0, os.path.abspath('../ext'))
 sys.path.insert(0, os.path.abspath('../../..'))
+import pytek
 import pytek.version
 
 # -- General configuration ------------------------------------------------
@@ -49,6 +51,7 @@ rst_prolog = """
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'linkcode',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.pngmath',
@@ -60,8 +63,63 @@ extensions = [
 
 intersphinx_mapping = {
     'serial': ('http://pyserial.sourceforge.net/', None),
-
 }
+
+import inspect
+import warnings
+import os.path
+import os
+
+source_root = os.path.split(inspect.getsourcefile(pytek))[0] + os.sep
+source_root_length = len(source_root)
+bitbucket_tagname = pytek.version.tag_name()
+
+linkcode_link_text = '[bitbucket]'
+
+def linkcode_resolve(domain, info):
+    """
+    Used by the linkcode extension to generate external links to code.
+    Note that the Makefile doesn't detect changes to this, you'll need to clean
+    in order to rebuild if you modify it.
+    """
+    if domain != 'py':
+        return None
+    if not info['module']:
+        return None
+    fullname = info['fullname']
+    modname = info['module']
+    last_mod = str(modname.split('.')[-1])
+
+    module = __import__(modname, globals(), locals(), [last_mod])
+    assert(module.__name__ == modname)
+
+    path = fullname.split('.')
+    target = module
+    parent = None
+    for name in path:
+        parent = target
+        target = getattr(target, name)
+    
+    try:
+        srcfile = inspect.getsourcefile(target)
+    except TypeError, e:
+        #Can't inspect variables.
+        srcfile = inspect.getsourcefile(parent)
+        target = None
+
+    if not source_root.startswith(source_root):
+        warnings.warn('WARNING: Source file is not under source root for %s.%s: %s' % (modname, fullname, srcfile))
+        return None
+
+    filename = srcfile[source_root_length:]
+    url = 'https://bitbucket.org/bmearns/pytek/src/%s/src/pytek/%s' % (pytek.version.tag_name(), filename)
+    if target is not None:
+        url += '#cl-%d' % inspect.getsourcelines(target)[1]
+
+    #print modname, fullname, url
+    return url
+        
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

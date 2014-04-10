@@ -320,6 +320,12 @@ def setuptools_string():
         vstr += "-r%d" % RELEASE
     return vstr
 
+def tag_name():
+    """
+    Returns the tag name for the most recent release.
+    """
+    return "r%d-v%d.%d.%d.%d" % (RELEASE, MAJOR, MINOR, PATCH, SEMANTIC)
+
 def short_string():
     """
     Returns a string describing the `Interface Version`_ (i.e., ``<Major>.<minor>``).
