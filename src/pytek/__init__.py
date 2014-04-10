@@ -21,9 +21,10 @@ serial interface supported by the devices. There is currently only one class pro
 
 import time
 import re
+from util import Configurator, Configurable
 
 
-class TDS3k(object):
+class TDS3k(Configurable):
     """
     The `TDS3k` class provides functions for interacting with the TDS 3000 series
     of |DPOs| from |tek|. Documentation on this interface is available from |tek|
@@ -218,27 +219,25 @@ class TDS3k(object):
 
     ### ACQUISITION ###
 
-    def acquire_state(self, state=None):
+    @Configurator.config("ACQUIRE:STATE")
+    def acquire_state(self, val):
         """
-        Set or query the acquisition state. If the `state` parameter is `None`, then queries and
-        returns the acuire state as a bool: `True` means the device is acquiring data, `False`
-        means it is not.
+        +++
 
-        If `state` is not `None`, then the acquire state is configured on the device. A value of
-        `True` for `state` turns acquisitions on, meaning the device will acquire data. A value of
-        `False` stops acquisitions.
-        
-        Any other value will be passed as a string to the device
-        as the argument to the ``ACQUIRE:STATE`` command. Commonly accepted values are
-        ``"ON"`` or ``"RUN"`` to turn acqusition on, and ``"OFF"`` or ``"STOP"`` to turn
-        acquisition off.
-
+        For queries, returns `True` if the acquisition system is running (i.e., in the 'RUN' state), `False`
+        otherwise.
         """
-        header = "ACQUIRE:STATE"
+        return val in ('1', 'ON', 'RUN')
+            
 
-        if state is None:
-            return (self.send_query(header) == "1")
-        self.send_command(header, "ON" if (state is True) else "OFF" if (state is False) else str(state))
+    @acquire_state.setter
+    def acquire_state(self, val):
+        """
+        +++
+        For configuring, a value of `True` turns acquisition on, a value of `False` turns it off.
+        Any other value is passed as a string to the device.
+        """
+        return "ON" if (state is True) else "OFF" if (state is False) else str(state)
 
 
     ### TRIGGER ###
