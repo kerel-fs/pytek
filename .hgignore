@@ -1,5 +1,9 @@
 syntax: glob
 
+
+#temp files
+temp~*
+
 #Vim Swap files
 .*.swp
 .*.swo

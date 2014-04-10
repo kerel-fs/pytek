@@ -86,7 +86,7 @@ class TDS3k(object):
         self.port.close()
 
 
-    ### Basic Communications ###
+    ### Basic Communications and Helpers ###
 
     def send_command(self, command, *args):
         """
@@ -155,6 +155,7 @@ class TDS3k(object):
                 break
             data += c
         return data
+
 
 
     ### Common Utility Commands ###
