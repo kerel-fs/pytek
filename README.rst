@@ -5,9 +5,7 @@ PyTek - Python API for Tektronix oscilloscopes' serial interface
 .. # POST TITLE
 .. # BEGIN BADGES
 
-|readme-badges|
-
-.. |readme-badges| replace:: |license-badge| |drone.io-badge| 
+|license-badge| |drone.io-badge| 
 
 .. |license-badge| image:: http://img.shields.io/badge/license-GPLv3-brightgreen.svg
     :alt: [GPLv3]
