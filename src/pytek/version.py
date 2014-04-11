@@ -272,7 +272,7 @@ The day of the month on which the code was released.
 """
 
 TAG = "dev"
-TAG = None
+#TAG = None
 """
 The current `Version Tag`_.
 
