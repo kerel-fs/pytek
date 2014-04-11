@@ -536,7 +536,7 @@ is returned.
         self.update_doc(func)
         return self
 
-    def set_boolean(self, func, strict=False, default=False):
+    def set_boolean(self, func, strict=False, default=False, nocase=False):
         """
         Configures the objects `set` and `get` filters based on a boolean setting.
 
@@ -584,9 +584,26 @@ is returned.
             `strict` is `False`, in which case it determines the *default* value when an
             unrecognized value is encountered.
 
+        :param bool nocase:     Optional, default value is `False`. If `True`, then values are
+            considered case-insensitive.
+
         """
         t_vals = func(True)
         f_vals = func(False)
+        pretty_val = lambda val : '``"%s"``' % val
+        val_list = lambda vals : ', '.join(pretty_val(v) for v in vals)
+        d = dict(
+            T_VALS = val_list(t_vals),
+            F_VALS = val_list(f_vals),
+            TRUE = pretty_val(t_vals[0]),
+            FALSE = pretty_val(f_vals[0]),
+        )
+
+        convert = lambda val : val
+        if nocase:
+            convert = lambda val : val.lower()
+            t_vals = map(convert, t_vals)
+            f_vals = map(convert, f_vals)
 
         if strict:
             def g(device, val):
@@ -598,6 +615,7 @@ is returned.
                     * `False` if the device replies with any of the following: %(F_VALS)s
                     * Otherwise, raise a `ValueError`.
                 """
+                val = convert(val)
                 if val in t_vals:
                     return True
                 if val in f_vals:
@@ -629,7 +647,7 @@ is returned.
                         * `False` if the device replies with any of the following: %(F_VALS)s
                         * `True` otherwise.
                     """
-                    return not (val in f_vals)
+                    return not (convert(val) in f_vals)
 
                 def s(device, val):
                     """
@@ -651,7 +669,7 @@ is returned.
                         * `True` if the device replies with any of the following: %(T_VALS)s
                         * `False` otherwise.
                     """
-                    return (val in t_vals)
+                    return (convert(val) in t_vals)
 
                 def s(device, val):
                     """
@@ -664,14 +682,6 @@ is returned.
                         return t_vals[0]
                     return f_vals[0]
             
-        pretty_val = lambda val : '``"%s"``' % val
-        val_list = lambda vals : ', '.join(pretty_val(v) for v in vals)
-        d = dict(
-            T_VALS = val_list(t_vals),
-            F_VALS = val_list(f_vals),
-            TRUE = pretty_val(t_vals[0]),
-            FALSE = pretty_val(f_vals[0]),
-        )
         g.__doc__ = g.__doc__ % d
         s.__doc__ = s.__doc__ % d
         self.getter(g)
