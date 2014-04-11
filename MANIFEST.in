@@ -5,8 +5,10 @@ include LICENSE.txt
 include BUGS.txt
 include CHANGES.txt
 include COPYING
-include src/pytek/sphinx/Makefile
-include src/pytek/sphinx/requirements.pip
-include src/pytek/sphinx/winmake.bat
-include src/pytek/sphinx/source/conf.py
-include src/pytek/sphinx/source/*.rst
+include sphinx/Makefile
+include sphinx/requirements.pip
+include sphinx/winmake.bat
+include sphinx/source/conf.py
+include sphinx/source/*.rst
+include sphinx/source/_static/css/*.css
+include sphinx/ext/*.py
