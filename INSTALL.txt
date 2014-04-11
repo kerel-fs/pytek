@@ -1,0 +1,6 @@
+To install from source, do:
+    python setup.py install
+
+To install from pypi using pip, do:
+    pip install pytek
+

@@ -1,0 +1,36 @@
+syntax: glob
+
+
+#temp files
+temp~*
+temp.py
+
+#Vim Swap files
+.*.swp
+.*.swo
+.*.swn
+.*.swm
+
+#Backup files
+*.bak
+*.orig
+*.original
+*.backup
+*.bup
+*~
+
+#Python files
+*.pyc
+*.pyo
+
+#Sphinx output
+sphinx/_build
+
+#setup.py stuff
+build
+dist
+distribute-0.6.14*
+**/pytek.egg-info
+
+#tag files
+tags

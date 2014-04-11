@@ -1,0 +1,14 @@
+include ez_setup.py
+include INSTALL.txt
+include README.rst
+include LICENSE.txt
+include BUGS.txt
+include CHANGES.txt
+include COPYING
+include sphinx/Makefile
+include sphinx/requirements.pip
+include sphinx/winmake.bat
+include sphinx/source/conf.py
+include sphinx/source/*.rst
+include sphinx/source/_static/css/*.css
+include sphinx/ext/*.py
