@@ -1,3 +1,9 @@
+
+.. include:: ../../README.rst
+    :start-after: .. # BEGIN BADGES
+    :end-before: .. # END BADGES
+
+
 =================================================================
 PyTek Documentation
 =================================================================
@@ -46,6 +52,8 @@ Indices and tables
 
 Version
 ----------
+
+|version-badge|
 
 This documentation is for PyTek |release|.
 

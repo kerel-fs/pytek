@@ -3,11 +3,25 @@ PyTek - Python API for Tektronix oscilloscopes' serial interface
 =================================================================
 
 .. # POST TITLE
+.. # BEGIN BADGES
 
-[![Build Status](https://drone.io/bitbucket.org/bmearns/pytek/status.png)](https://drone.io/bitbucket.org/bmearns/pytek/latest)
+|readme-badges|
+
+.. |readme-badges| replace:: |license-badge| |drone.io-badge| 
+
+.. |license-badge| image:: http://img.shields.io/badge/license-GPLv3-brightgreen.svg
+    :alt: [GPLv3]
+    :target: https://www.gnu.org/licenses/gpl.html
+
+.. |drone.io-badge| image:: https://drone.io/bitbucket.org/bmearns/pytek/status.png
+    :alt: [drone.io status]
+    :target: https://drone.io/bitbucket.org/bmearns/pytek
 
 .. _pyserial: http://pyserial.sourceforge.net/
 .. _sphinx_rtd_theme: https://github.com/snide/sphinx_rtd_theme
+
+.. # END BADGES
+
 
 **PyTek** provides a python API for interacting with Tektronix oscilloscopes over a serial
 interface. It currently supports some basic commands for the TDS3000
