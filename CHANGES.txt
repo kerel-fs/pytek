@@ -1,3 +1,6 @@
+Rel 3   - v1.1.0.1 - 2014-04-10
+    [s] -   Moved sphinx out of src dir to top level.
+
 Rel 2   - v1.1.0.0 - 2014-04-10
     [n] -   Added some methods to TDS3k related to acquisition and triggering.
     [n] -   Moved the TDS3k class (and TDS3xxx alias) into the top level pytek
