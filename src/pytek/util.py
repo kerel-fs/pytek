@@ -375,12 +375,50 @@ is returned.
         """
         return func.__name__.upper()
 
+
+    @classmethod
+    def boolean(cls, arg, **kwargs):
+        """
+        A function decorator utility used to create a `Configurator` object
+        which handles boolean settings. This ends up delegating to `set_boolean`
+        to actually set up the `get` and `set` filters based on responses from 
+        the decorated function. All keyword arguments passed to this function
+        are forwarded to `set_boolean`.
+
+        Similar to `config`, you can invoke this with *implicit arguments*
+        or *explicit arguments*
+
+        For **implicit arguments**, you use this method as a function decorator directly,
+        and the `name` to use is derived from the decorated function with `func_to_name`.
+        In this mode, you can't specify any additional arguments to pass to `set_boolean`.
+        
+        For **explicit arguments**, you invoke this method directly, and it returns
+        a function decorator. This allows you to pass in a string as the first argument
+        to specify the `name` to use, as well as additional keyword arguments to
+        be forwarded on to `set_boolean`.
+
+        .. seealso:
+            * set_boolean
+            * config
+
+        """
+        c = cls(arg)
+        if callable(arg):
+            c.set_boolean(arg, **kwargs)
+            return c
+
+        def wrapper(func):
+            c.set_boolean(func, **kwargs)
+            return c
+        return wrapper
+        
+
     @classmethod
     def config(cls, arg):
         """
 
-        A function wrapper utility used to create a `Configurator` object and a
-        function wrapper to configure its `getter`.
+        A function decorator utility used to create a `Configurator` object and a
+        function decorator to configure its `getter`.
 
         There are two way to invoke this, using *implicit naming* or
         *explicit naming*.
@@ -498,6 +536,144 @@ is returned.
         self.update_doc(func)
         return self
 
+    def set_boolean(self, func, strict=False, default=False):
+        """
+        Configures the objects `set` and `get` filters based on a boolean setting.
+
+        A boolean setting means the setting has a set of possible values that are
+        partitioned into two subsets: true values and false values. On the python side,
+        any value in these subsets corresponds to a value of `True` or `False`, respectively.
+
+        This method sets up the object to filter values accordingly, so that querying
+        the setting always returns `True` or `False`, and configuring the setting can be
+        done with `True` or `False`.
+
+        To do so, you have to pass in a function which can be evaluated immediately to get the
+        set of true values and the set of false values. The function should take a single
+        boolean argument, if the argument value is `True`, return the set of true values,
+        otherwise, return the set of false values. The method will then create appropriate
+        set and get filters based on these values and the other parameters passed into
+        this function (see below).
+
+        The sets of true values and false values returned by `func` must be sequences.
+        The first value in each sequence will be used as the *canonical* value, meaning the
+        ones that will actually be passed to the device for the corresponding value. All other
+        values in the sets will be acceptable responses from the device for queries, and
+        will result in the corresponding boolean value being returned to the caller.
+
+        .. seealso::
+            `boolean`
+
+        :param callable func:   This function will be called twice, immediately. Once with a value
+            of `True`, which should return a sequence of true values; and once with a value of
+            `False`, which should return a sequence of false values.
+
+        :param bool strict:     Optional, default is `False`. If `True`, then the generated
+            `set` and `get` filters will be strict about values. The `set` filter will only
+            accept boolean values, and will raise a `TypeError` otherwise. The `get` filter
+            will only accept values from the true- and false- value sets, and will raise
+            a `ValueError` if the device returns anything else.
+
+            If the value of the parameter is `False`, the generated functions are not as
+            strict, and will not raise exceptions for unrecognized values (the way it handles
+            unrecognized values depends on the value of the `default` parameter).
+            For the non-strict `set` filter, values are simply evaluated as bools to choose
+            which value to send.
+
+        :param bool default:    Optional, default value is `False`. This is only used if
+            `strict` is `False`, in which case it determines the *default* value when an
+            unrecognized value is encountered.
+
+        """
+        t_vals = func(True)
+        f_vals = func(False)
+
+        if strict:
+            def g(device, val):
+                """
+                +++
+                For *queries*, return `True` or `False`:
+                    * `True` if the device replies with any of the following: %(T_VALS)s
+                    * `False` if the device replies with any of the following: %(F_VALS)s
+                    * Otherwise, raise a `ValueError`.
+                """
+                if val in t_vals:
+                    return True
+                if val in f_vals:
+                    return False
+                raise ValueError("Unexpected value returned from device: %r" % val)
+
+            def s(device, val):
+                """
+                +++
+                For *configuring*, accepts values of `True` or `False`:
+                    * `True` will cause %(TRUE)s to be sent to the device.
+                    * `False` will cause %(FALSE)s to be sent to the device.
+                    * Any other value will raise a `TypeError`.
+                """
+                if val is True:
+                    return t_vals[0]
+                if val is False:
+                    return f_vals[0]
+                raise TypeError("Expected boolean value, received: %r" % val)
+
+        else:
+            if default:
+                def g(device, val):
+                    """
+                    +++
+                    For *queries*, return `True` or `False`:
+                        * `False` if the device replies with any of the following: %(F_VALS)s
+                        * `True` otherwise.
+                    """
+                    return not (val in f_vals)
+
+                def s(device, val):
+                    """
+                    +++
+                    For *configuring*, if `val` evaluates as `False`, causes %(FALSE)s to
+                    be sent to the device. Any other value for `val` causes %(TRUE)s
+                    to be sent.
+                    """
+                    if bool(val):
+                        return f_vals[0]
+                    return t_vals[0]
+
+            else:
+                def g(device, val):
+                    """
+                    +++
+                    For *queries*, return `True` or `False`:
+                        * `True` if the device replies with any of the following: %(T_VALS)s
+                        * `False` otherwise.
+                    """
+                    return (val in t_vals)
+
+                def s(device, val):
+                    """
+                    +++
+                    For *configuring*, if `val` evaluates as `True`, causes %(TRUE)s to
+                    be sent to the device. Any other value for `val` causes %(FALSE)s
+                    to be sent.
+                    """
+                    if bool(val):
+                        return t_vals[0]
+                    return f_vals[0]
+            
+        pretty_val = lambda val : '``"%s"``' % val
+        val_list = lambda vals : ', '.join(pretty_val(v) for v in vals)
+        d = dict(
+            T_VALS = val_list(t_vals),
+            F_VALS = val_list(f_vals),
+            TRUE = pretty_val(t_vals[0]),
+            FALSE = pretty_val(f_vals[0]),
+        )
+        g.__doc__ = g.__doc__ % d
+        s.__doc__ = s.__doc__ % d
+        self.getter(g)
+        self.setter(s)
+
+        self.update_doc(func)
 
 
     class ConfigurableMeta(type):
