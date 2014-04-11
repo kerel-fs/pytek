@@ -205,7 +205,7 @@ Module Contents
 
 """
 
-RELEASE = 3
+RELEASE = 4
 """
 The current `Release Number`_.
 """
@@ -225,7 +225,7 @@ PATCH = 0
 The current :ref:`patch version number <patch-version>`.
 """
 
-SEMANTIC = 1
+SEMANTIC = 2
 """
 The current :ref:`semantic version number <semantic-version>`.
 """
