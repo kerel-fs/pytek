@@ -593,6 +593,7 @@ is returned.
                 """
                 +++
                 For *queries*, return `True` or `False`:
+
                     * `True` if the device replies with any of the following: %(T_VALS)s
                     * `False` if the device replies with any of the following: %(F_VALS)s
                     * Otherwise, raise a `ValueError`.
@@ -607,6 +608,7 @@ is returned.
                 """
                 +++
                 For *configuring*, accepts values of `True` or `False`:
+
                     * `True` will cause %(TRUE)s to be sent to the device.
                     * `False` will cause %(FALSE)s to be sent to the device.
                     * Any other value will raise a `TypeError`.
@@ -623,6 +625,7 @@ is returned.
                     """
                     +++
                     For *queries*, return `True` or `False`:
+
                         * `False` if the device replies with any of the following: %(F_VALS)s
                         * `True` otherwise.
                     """
@@ -644,6 +647,7 @@ is returned.
                     """
                     +++
                     For *queries*, return `True` or `False`:
+
                         * `True` if the device replies with any of the following: %(T_VALS)s
                         * `False` otherwise.
                     """

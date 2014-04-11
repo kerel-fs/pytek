@@ -219,25 +219,11 @@ class TDS3k(Configurable):
 
     ### ACQUISITION ###
 
-    @Configurator.config("ACQUIRE:STATE")
-    def acquire_state(self, val):
-        """
-        +++
-
-        For queries, returns `True` if the acquisition system is running (i.e., in the 'RUN' state), `False`
-        otherwise.
-        """
-        return val in ('1', 'ON', 'RUN')
-            
-
-    @acquire_state.setter
-    def acquire_state(self, val):
-        """
-        +++
-        For configuring, a value of `True` turns acquisition on, a value of `False` turns it off.
-        Any other value is passed as a string to the device.
-        """
-        return "ON" if (state is True) else "OFF" if (state is False) else str(state)
+    @Configurator.boolean("ACQUIRE:STATE")
+    def acquire_state(flag):
+        if flag:
+            return ('1', 'ON', 'RUN')
+        return ('0', 'OFF', 'STOP')
 
 
     ### TRIGGER ###
