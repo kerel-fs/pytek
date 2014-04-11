@@ -2,6 +2,9 @@
 Tests for distribution. Should be run from the top level project directory.
 """
 
+from nose.plugins.attrib import attr
+import nose.tools
+
 import re
 import os
 import sys
@@ -13,6 +16,18 @@ import pytek.version
 
 
 changes_heading_re = re.compile(r'^Rel\s+(?P<release>\d+)\s+- v(?P<M>\d+).(?P<n>\d+).(?P<p>\d+).(?P<s>\d+) - (?P<year>\d\d\d\d)-(?P<month>\d\d)-(?P<day>\d\d)\s*$')
+
+
+#TODO: Figure out an automated way to determine whether or not this is a release, to choose between the next two tests.
+@nose.tools.nottest
+@attr('release')
+def test_empty_tag():
+    assert(pytek.version.TAG is None)
+
+@nose.tools.nottest
+@attr('no-release')
+def test_not_empty_tag():
+    assert(pytek.version.TAG is not None)
 
 def test_changes_dot_txt_top_version():
     with open("CHANGES.txt", "r") as changes:
