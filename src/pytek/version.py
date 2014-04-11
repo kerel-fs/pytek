@@ -205,7 +205,7 @@ Module Contents
 
 """
 
-RELEASE = 1
+RELEASE = 2
 """
 The current `Release Number`_.
 """
@@ -215,7 +215,7 @@ MAJOR = 1
 The current :ref:`major version number <major-version>`.
 """
 
-MINOR = 0
+MINOR = 1
 """
 The current :ref:`minor version number <minor-version>`.
 """
@@ -260,7 +260,7 @@ The month in which the code was released. This is 1 indexed, in [1, 12].
 
 """
 
-DAY = 7
+DAY = 10
 """
 The day of the month on which the code was released.
 
@@ -271,8 +271,8 @@ The day of the month on which the code was released.
 
 """
 
-TAG = "dev"
-#TAG = None
+#TAG = "dev"
+TAG = None
 """
 The current `Version Tag`_.
 

@@ -1,23 +1,27 @@
-Rel 2   - ???
+Rel 2   - v1.1.0.0 - 2014-04-10
+    [n] -   Added some methods to TDS3k related to acquisition and triggering.
+    [n] -   Moved the TDS3k class (and TDS3xxx alias) into the top level pytek
+            module (__init__.py), and left aliases in the pytek.pytek module.
     [n] -   Added TDS3xxx as an alias for TDS3k class.
-    [n] -   Copied pytek.pytek.TDS3k and TDS3xxx into top level pytek module,
-            for easier imports.
     [n] -   Added short_string method to version.py, to get a Major.minor
             version string.
-    [n] -   Added sphinx source, config, and script files to MANIFEST.in, to
+    [n] -   Added extras to setup.py: serial and docs.
+    [n] -   Added util module, with Configurator class for easier
+            implementation of methods tht configure or query a setting on the
+            device.
+
+    [s] -   Added sphinx source, config, and script files to MANIFEST.in, to
             include them in builds so distributions can be used to build
             sphinx doc.
-    [n] -   Added extras to setup.py: serial and docs.
-
-    [p] -   Moved the TDS3k class (and TDS3xxx alias) into the top level pytek
-            module (__init__.py), and left aliases in the pytek.pytek module.
-
     [s] -   Added INSTALL.txt top level doc file.
+    [s] -   Using version.py to populate sphinx variables in conf.py
     [s] -   Cleaned up README.rst, added some stuff.
     [s] -   Fixed doc string for TDS3k.__init__, to include serial port
             timeout.
-    [s] -   Using version.py to populate sphinx variables in conf.py
     [s] -   Significant doc clean up and reorganization.
+    [s] -   Added doc comments to version.py, added to sphinx.
+    [s] -   Added custom linkcode-based extension to sphinx, to add bitbucket
+            links for source browsing.
 
     
 
