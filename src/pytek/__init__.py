@@ -248,36 +248,58 @@ class TDS3k(Configurable):
 
     def trigger(self):
         """
-        Force the device to trigger, if in READY state.
+        Force the device to trigger, assuming it is in READY state (see `trigger_state`).
+
+        This sends the ``TRIGGER FORCE`` command to the device.
         """
         self.send_command("TRIGGER", "FORCE");
 
-    def trigger_auto(self, auto=True):
+    @Configurator.boolean("TRIGGER:A:MODE", nocase=True)
+    def trigger_auto(flag):
         """
-        Enables or disables the automatic trigger mode.
+        The ``TRIGGER:A:MODE`` is related to the "AUTO" and "NORMAL" selections in
+        the Trigger menu. If set to `True`, the trigger is in "AUTO (Untriggered roll)"
+        mode, in which the device automatically generates a trigger if none is detected.
 
-        :param bool auto: If `True` (the default), the device is configured to trigger in auto mode,
-            meaning it generates a trigger automatically after a specific time period (if not trigger
-            is otherwise detected).
-            
-            If `False`, configures the device in NORMAL trigger mode, meaning it will wait to trigger
-            until it detects a valid trigger event.
+        Otherwise, the device is in "NORMAL" mode, in which the device waits for a valid trigger.
         """
-        self.send_command("TRIGGER:A:MODE", "AUTO" if auto else "NORM" )
+        if flag:
+            return ["auto",]
+        return ["norm", "normal"]
+
+
+    __TRIGGER_STATE_LIST = [
+        ["auto", ],
+        ["armed", ],
+        ["ready", ],
+        ["save", "sav"],
+        ["trigger", "trig"],
+    ]
+    __TRIGGER_STATES = {}
+    for seq in __TRIGGER_STATE_LIST:
+        val = seq[0]
+        for k in seq:
+            __TRIGGER_STATES[k] = val
 
     def trigger_state(self):
         """
         Returns a string indicating the current trigger state of the device.
+        This queries the ``TRIGGER:STATE`` setting on the device.
 
         The following list gives the possible return values:
 
-        * **AUTO** - indicates that the oscilloscope is in auto mode and acquires data even in the absence of a trigger.
-        * **ARMED** - indicates that the oscilloscope is acquiring pretrigger information. All triggers are ignored in this state.
-        * **READY** - indicates that all pretrigger information has been acquired and the oscilloscope is ready to accept a trigger.
-        * **SAV** - indicates that acquisition is stopped or that all channels are off.
-        * **TRIG** - indicates that the oscilloscope has seen a trigger and is acquiring the posttrigger information.
+        * **auto** - indicates that the oscilloscope is in auto mode and acquires data even in the absence of a trigger (see `trigger_auto`).
+        * **armed** - indicates that the oscilloscope is acquiring pretrigger information. All triggers are ignored in this state.
+        * **ready** - indicates that all pretrigger information has been acquired and the oscilloscope is waiting for a trigger.
+        * **save** - indicates that acquisition is stopped or that all channels are off.
+        * **trigger** - indicates that the oscilloscope has seen a trigger and is acquiring the posttrigger information.
+
         """
-        return self.send_query("TRIGGER:STATE")
+        val = self.send_query("TRIGGER:STATE")
+        try:
+            return self.__TRIGGER_STATES[val.lower()]
+        except KeyError:
+            return val
 
 
 
