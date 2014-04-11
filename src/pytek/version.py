@@ -225,7 +225,7 @@ PATCH = 0
 The current :ref:`patch version number <patch-version>`.
 """
 
-SEMANTIC = 0
+SEMANTIC = 1
 """
 The current :ref:`semantic version number <semantic-version>`.
 """
@@ -272,7 +272,7 @@ The day of the month on which the code was released.
 """
 
 TAG = "dev"
-#TAG = None
+TAG = None
 """
 The current `Version Tag`_.
 
