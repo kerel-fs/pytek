@@ -35,6 +35,11 @@ rst_prolog = """
 .. _pyserial: http://pyserial.sourceforge.net/
 .. _tds3k_prog_man: http://www.tek.com/oscilloscope/tds3014b-manual/tds3000-tds3000b-tds3000c-series
 
+
+.. |version-badge| image:: http://img.shields.io/badge/version-%(VERSION_SHIELD)s-blue.svg
+    :alt: [version %(VERSION)s]
+    :target: https://bitbucket.org/bmearns/pytek/commits/tag/%(VERSION)s
+
 .. |DPO|    replace:: :abbr:`DPO (Digital Phosphor Oscilloscope)`
 .. |DPOs|   replace:: :abbr:`DPO's (Digital Phosphor Oscilloscopes)`
 .. |DSO|    replace:: :abbr:`DSO (Digital Storage Oscilloscope)`
@@ -44,7 +49,10 @@ rst_prolog = """
 .. |oscopes|    replace:: oscilloscopes
 .. |PYTEK|      replace:: :doc:`PyTek <index>`
 
-"""
+""" % dict(
+    VERSION = pytek.version.tag_name(),
+    VERSION_SHIELD = pytek.version.tag_name().replace('-', '--').replace('_', '__').replace(' ', '_'),
+)
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
