@@ -221,6 +221,11 @@ class TDS3k(Configurable):
 
     @Configurator.boolean("ACQUIRE:STATE", nocase=True)
     def acquire_state(flag):
+        """
+        +++
+        The ``ACQUIRE:STATE`` setting is related to the "RUN / STOP" button on the device,
+        and it basically configures whether the device is actually acquiring data or not.
+        """
         if flag:
             return ('1', 'ON', 'RUN')
         return ('0', 'OFF', 'STOP')
@@ -229,7 +234,7 @@ class TDS3k(Configurable):
     def acquire_single(flag):
         """
         +++
-        This setting is related to the "single sequence" button on the device.
+        The ``ACQUIRE:STOPAFTER`` setting is related to the "single sequence" button on the device.
         If `True`, then when the device is set to acquire (e.g., by passing `True`
         to `acquire_state`), it will only acquire a single sequence, and then
         stop automatically. Otherwise, it will continue to acquire until it is stopped.
