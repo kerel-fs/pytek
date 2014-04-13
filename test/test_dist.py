@@ -36,7 +36,7 @@ def test_changes_dot_txt_top_version():
             if len(line.strip()):
                 mobj = changes_prerelease_re.match(line)
                 def match_number(group_name, against):
-                    assert(int(mobj.group(group_name)) == against)
+                    assert(int(mobj.group(group_name)) == against), "Failed to match value of '%s': %s != %r" % (group_name, mobj.group(group_name), against)
 
                 if mobj is not None:
                     #Pre-releases (development versions)

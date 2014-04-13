@@ -205,7 +205,7 @@ Module Contents
 
 """
 
-RELEASE = 4
+RELEASE = 5
 """
 The current `Release Number`_.
 """
@@ -220,16 +220,30 @@ MINOR = 1
 The current :ref:`minor version number <minor-version>`.
 """
 
-PATCH = 0
+PATCH = 1
 """
 The current :ref:`patch version number <patch-version>`.
 """
 
-SEMANTIC = 2
+SEMANTIC = 0
 """
 The current :ref:`semantic version number <semantic-version>`.
 """
 
+#TAG = "dev"
+TAG = None
+"""
+The current `Version Tag`_.
+
+Tag options are `None`, ``"dev"``, and ``"blood-"``
+
+    * `None` means this is a released/tagged version.
+    * ``"dev"`` means this is a development version from the trunk/mainline.
+    * ``"blood-"`` means it's on a branch. After the dash, fill in the name of the branch.
+
+Dev and blood versions are still numbered for the *previous* version,
+because we may not know what the next version will be until we're finished.
+"""
 
 
 COPYRIGHT = 2014
@@ -260,7 +274,7 @@ The month in which the code was released. This is 1 indexed, in [1, 12].
 
 """
 
-DAY = 10
+DAY = 13
 """
 The day of the month on which the code was released.
 
@@ -271,20 +285,6 @@ The day of the month on which the code was released.
 
 """
 
-TAG = "dev"
-#TAG = None
-"""
-The current `Version Tag`_.
-
-Tag options are `None`, ``"dev"``, and ``"blood-"``
-
-    * `None` means this is a released/tagged version.
-    * ``"dev"`` means this is a development version from the trunk/mainline.
-    * ``"blood-"`` means it's on a branch. After the dash, fill in the name of the branch.
-
-Dev and blood versions are still numbered for the *previous* version,
-because we may not know what the next version will be until we're finished.
-"""
 
 
 MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]

@@ -1,5 +1,8 @@
-Pre-Rel 5
+Rel 5   - v1.1.1.0 - 2014-04-13
     [p] -   Fixed bug in TDS3k.sanity_check, did not actually return a bool.
+
+    [s] -   Removed dynamic badges from doc, don't make sense for released
+            code. Left in README.
 
 Rel 4   - v1.1.0.2 - 2014-04-10
     [s] -   Added badges to docs and README.
