@@ -206,7 +206,7 @@ class TDS3k(Configurable):
 
         """
         id = self.identify()
-        return TDS3k.ID_REGEX.match(id)
+        return TDS3k.ID_REGEX.match(id) is not None
 
     def force_sanity(self):
         """
