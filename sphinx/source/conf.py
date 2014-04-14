@@ -36,6 +36,10 @@ rst_prolog = """
 .. _tds3k_prog_man: http://www.tek.com/oscilloscope/tds3014b-manual/tds3000-tds3000b-tds3000c-series
 
 
+.. |license-badge| image:: http://img.shields.io/badge/license-GPLv3-brightgreen.svg
+    :alt: [GPLv3]
+    :target: https://www.gnu.org/licenses/gpl.html
+
 .. |version-badge| image:: http://img.shields.io/badge/version-%(VERSION_SHIELD)s-blue.svg
     :alt: [version %(VERSION)s]
     :target: https://bitbucket.org/bmearns/pytek/commits/tag/%(VERSION)s

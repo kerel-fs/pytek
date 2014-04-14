@@ -4,5 +4,5 @@ README
 =================================================================
 
 .. include:: ../../README.rst
-    :start-after: .. # POST TITLE
+    :start-after: .. # END BADGES
 

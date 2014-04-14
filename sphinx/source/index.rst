@@ -1,8 +1,5 @@
 
-.. include:: ../../README.rst
-    :start-after: .. # BEGIN BADGES
-    :end-before: .. # END BADGES
-
+|version-badge| |license-badge|
 
 =================================================================
 PyTek Documentation
