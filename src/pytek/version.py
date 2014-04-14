@@ -230,8 +230,8 @@ SEMANTIC = 0
 The current :ref:`semantic version number <semantic-version>`.
 """
 
-#TAG = "dev"
-TAG = None
+TAG = "dev"
+#TAG = None
 """
 The current `Version Tag`_.
 
