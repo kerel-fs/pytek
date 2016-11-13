@@ -22,7 +22,12 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages('src'),  #Looks for __init__.py
     include_package_data = True,    #Uses MANIFEST.in
-
+    classifiers=[
+        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Software Development :: Libraries',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ],
     extras_require = {
         'serial': ["pyserial"],
         'docs': ["sphinx_rtd_theme"],
