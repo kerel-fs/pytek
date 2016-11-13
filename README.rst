@@ -15,7 +15,7 @@ PyTek - Python API for Tektronix oscilloscopes' serial interface
     :alt: [drone.io status]
     :target: https://drone.io/bitbucket.org/bmearns/pytek
 
-.. _pyserial: http://pyserial.sourceforge.net/
+.. _pyserial: https://github.com/pyserial/pyserial/
 .. _sphinx_rtd_theme: https://github.com/snide/sphinx_rtd_theme
 
 .. # END BADGES

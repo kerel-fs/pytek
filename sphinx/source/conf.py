@@ -32,7 +32,7 @@ pytek = reload(pytek)
 #reST content to prepend to every source file that is processed.
 rst_prolog = """
 
-.. _pyserial: http://pyserial.sourceforge.net/
+.. _pyserial: https://github.com/pyserial/pyserial/
 .. _tds3k_prog_man: http://www.tek.com/oscilloscope/tds3014b-manual/tds3000-tds3000b-tds3000c-series
 
 
@@ -77,7 +77,7 @@ extensions = [
 ]
 
 intersphinx_mapping = {
-    'serial': ('http://pyserial.sourceforge.net/', None),
+    'serial': ('https://pythonhosted.org/pyserial/', None),
 }
 
 import inspect
