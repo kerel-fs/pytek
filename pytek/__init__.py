@@ -17,11 +17,14 @@ serial interface supported by the devices. There is currently only one class pro
     `pyserial` itself.
 
 """
-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import time
 import re
-from util import Configurator, Configurable
+from .util import Configurator, Configurable
 
 
 class TDS3k(Configurable):

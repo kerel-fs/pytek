@@ -1,8 +1,13 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+
 import re
 import os
 
 class Configurator(object):
-    """
+    r"""
     The `Configurator` class creates helper objects that can be used
     to easily add methods to a class to configure and query a particular setting
     on the device.
