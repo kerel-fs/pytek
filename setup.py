@@ -5,8 +5,6 @@ ez_setup.use_setuptools()
 from setuptools import setup, find_packages
 import sys
 
-
-sys.path.insert(0, "src")
 import pytek.version
 
 
@@ -19,8 +17,7 @@ setup(
     url='https://bitbucket.org/bmearns/pytek/',
     license='LICENSE.txt',
 
-    package_dir={'': 'src'},
-    packages=find_packages('src'),  #Looks for __init__.py
+    packages=find_packages(),  #Looks for __init__.py
     include_package_data = True,    #Uses MANIFEST.in
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',

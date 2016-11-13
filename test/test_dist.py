@@ -9,8 +9,6 @@ import re
 import os
 import sys
 
-sys.path.insert(0, "src")
-
 import pytek
 import pytek.version
 
