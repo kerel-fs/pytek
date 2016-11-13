@@ -1,0 +1,8 @@
+# Install pytek requirements
+-e .
+
+# Install development requirements
+-e .[dev]
+
+# Install documentation build requirements
+-e .[docs]

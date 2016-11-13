@@ -27,6 +27,7 @@ setup(
     ],
     extras_require = {
         'serial': ["pyserial"],
+        'dev': ["nose==1.3.7"],
         'docs': ["sphinx_rtd_theme"],
     }
 )
