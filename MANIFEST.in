@@ -5,7 +5,6 @@ include BUGS.txt
 include CHANGES.txt
 include COPYING
 include sphinx/Makefile
-include sphinx/requirements.pip
 include sphinx/winmake.bat
 include sphinx/source/conf.py
 include sphinx/source/*.rst
