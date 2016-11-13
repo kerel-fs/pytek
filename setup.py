@@ -13,7 +13,7 @@ import pytek.version
 setup(
     name='pytek',
     version=pytek.version.setuptools_string(),
-    description='Python API for Tektronix Oscillscopes erial interface.',
+    description='Python API for Tektronix Oscillscopes Serial interface.',
     author='Brian Mearns',
     author_email='bmearns@ieee.org',
     url='https://bitbucket.org/bmearns/pytek/',
